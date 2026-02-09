@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useId } from '../../composables/useId'
 
 defineProps<{
@@ -11,14 +12,15 @@ defineProps<{
 }>()
 
 const collapseId = useId('navbar')
+const isOpen = ref(false)
 </script>
 
 <template lang="pug">
 nav(:class="[ 'navbar', expand && `navbar-expand-${expand}`, bg && `bg-${bg}`, fixed && `fixed-${fixed}`, sticky && `sticky-${sticky}`, ]" :data-bs-theme="variant")
   div.container-fluid
     a.navbar-brand(v-if="brand" href="#") {{ brand }}
-    button.navbar-toggler(type="button" data-bs-toggle="collapse" :data-bs-target="`#${collapseId}`")
+    button.navbar-toggler(type="button" @click="isOpen = !isOpen")
       span.navbar-toggler-icon
-    div.collapse.navbar-collapse(:id="collapseId")
+    div(:id="collapseId" :class="['collapse navbar-collapse', isOpen && 'show']")
       slot
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { Offcanvas } from 'bootstrap'
+import { ref, watch, onBeforeUnmount } from 'vue'
 
 const props = defineProps<{
   modelValue?: boolean
@@ -14,38 +13,51 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
-const offcanvasRef = ref<HTMLElement | null>(null)
-let bsOffcanvas: Offcanvas | null = null
+const visible = ref(props.modelValue ?? false)
+const showing = ref(false)
+const hiding = ref(false)
 
-onMounted(() => {
-  if (!offcanvasRef.value) return
-  bsOffcanvas = new Offcanvas(offcanvasRef.value, {
-    backdrop: props.backdrop !== false,
-    scroll: props.scroll ?? false,
-  })
+function open() {
+  visible.value = true
+  showing.value = true
+  setTimeout(() => { showing.value = false }, 300)
+}
 
-  offcanvasRef.value.addEventListener('hidden.bs.offcanvas', () => emit('update:modelValue', false))
+function close() {
+  hiding.value = true
+  setTimeout(() => {
+    visible.value = false
+    hiding.value = false
+    emit('update:modelValue', false)
+  }, 300)
+}
 
-  if (props.modelValue) bsOffcanvas.show()
-})
+function onBackdropClick() {
+  close()
+}
 
-watch(() => props.modelValue, (show) => {
-  if (!bsOffcanvas) return
-  if (show) bsOffcanvas.show()
-  else bsOffcanvas.hide()
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') close()
+}
+
+watch(() => props.modelValue, (val) => {
+  if (val) open()
+  else if (visible.value) close()
 })
 
 onBeforeUnmount(() => {
-  bsOffcanvas?.dispose()
+  visible.value = false
 })
 </script>
 
 <template lang="pug">
-div(ref="offcanvasRef" :class="['offcanvas', `offcanvas-${placement ?? 'start'}`]" tabindex="-1")
-  div.offcanvas-header
-    h5.offcanvas-title
-      slot(name="title") {{ title }}
-    button.btn-close(type="button" data-bs-dismiss="offcanvas" aria-label="Close")
-  div.offcanvas-body
-    slot
+div(v-if="visible")
+  div(:class="['offcanvas', `offcanvas-${placement ?? 'start'}`, visible && 'show', showing && 'showing', hiding && 'hiding']" tabindex="-1" @keydown="onKeydown")
+    div.offcanvas-header
+      h5.offcanvas-title
+        slot(name="title") {{ title }}
+      button.btn-close(type="button" aria-label="Close" @click="close")
+    div.offcanvas-body
+      slot
+  div.offcanvas-backdrop.fade.show(v-if="backdrop !== false" @click="onBackdropClick")
 </template>

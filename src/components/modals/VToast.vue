@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { Toast } from 'bootstrap'
+import { watch, onBeforeUnmount } from 'vue'
 
 const props = defineProps<{
   modelValue?: boolean
@@ -14,38 +13,40 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
-const toastRef = ref<HTMLElement | null>(null)
-let bsToast: Toast | null = null
+let timer: ReturnType<typeof setTimeout> | null = null
 
-onMounted(() => {
-  if (!toastRef.value) return
-  bsToast = new Toast(toastRef.value, {
-    autohide: props.autohide !== false,
-    delay: props.delay ?? 5000,
-  })
+function clearTimer() {
+  if (timer) {
+    clearTimeout(timer)
+    timer = null
+  }
+}
 
-  toastRef.value.addEventListener('hidden.bs.toast', () => emit('update:modelValue', false))
-
-  if (props.modelValue) bsToast.show()
-})
+function startTimer() {
+  clearTimer()
+  if (props.autohide !== false) {
+    timer = setTimeout(() => {
+      emit('update:modelValue', false)
+    }, props.delay ?? 5000)
+  }
+}
 
 watch(() => props.modelValue, (show) => {
-  if (!bsToast) return
-  if (show) bsToast.show()
-  else bsToast.hide()
-})
+  if (show) startTimer()
+  else clearTimer()
+}, { immediate: true })
 
 onBeforeUnmount(() => {
-  bsToast?.dispose()
+  clearTimer()
 })
 </script>
 
 <template lang="pug">
-div(ref="toastRef" :class="['toast', variant && `text-bg-${variant}`]" role="alert")
+div(:class="['toast', variant && `text-bg-${variant}`, modelValue && 'show']" role="alert")
   div.toast-header(v-if="title")
     strong.me-auto {{ title }}
     slot(name="header-extra")
-    button.btn-close(type="button" data-bs-dismiss="toast" aria-label="Close")
+    button.btn-close(type="button" aria-label="Close" @click="emit('update:modelValue', false)")
   div.toast-body
     slot
 </template>

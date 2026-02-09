@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { Dropdown } from 'bootstrap'
 
 const props = defineProps<{
   text?: string
@@ -10,24 +9,41 @@ const props = defineProps<{
   menuAlign?: 'end'
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   show: []
   hide: []
 }>()
 
-const toggleRef = ref<HTMLElement | null>(null)
-let bsDropdown: Dropdown | null = null
+const isOpen = ref(false)
+const dropdownRef = ref<HTMLElement | null>(null)
+
+function toggle() {
+  isOpen.value = !isOpen.value
+  if (isOpen.value) emit('show')
+  else emit('hide')
+}
+
+function close() {
+  if (!isOpen.value) return
+  isOpen.value = false
+  emit('hide')
+}
+
+function onClickOutside(e: MouseEvent) {
+  if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
+    close()
+  }
+}
 
 onMounted(() => {
-  if (!toggleRef.value) return
-  bsDropdown = new Dropdown(toggleRef.value)
+  document.addEventListener('click', onClickOutside, true)
 })
 
 onBeforeUnmount(() => {
-  bsDropdown?.dispose()
+  document.removeEventListener('click', onClickOutside, true)
 })
 
-const dirClass = {
+const dirClass: Record<string, string> = {
   up: 'dropup',
   end: 'dropend',
   start: 'dropstart',
@@ -35,10 +51,12 @@ const dirClass = {
 </script>
 
 <template lang="pug">
-div(:class="[split ? 'btn-group' : 'dropdown', direction && dirClass[direction]]")
+div(ref="dropdownRef" :class="[split ? 'btn-group' : 'dropdown', direction && dirClass[direction]]")
   button(v-if="split" type="button" :class="`btn btn-${variant ?? 'primary'}`")
     slot(name="button-text") {{ text }}
-  button(ref="toggleRef" type="button" :class="[ `btn btn-${variant ?? 'primary'}`, 'dropdown-toggle', split && 'dropdown-toggle-split', ]" data-bs-toggle="dropdown")
+  button(type="button" :class="[ `btn btn-${variant ?? 'primary'}`, 'dropdown-toggle', split && 'dropdown-toggle-split', isOpen && 'show', ]" @click="toggle")
     template(v-if="!split")
       slot(name="button-text") {{ text }}
+  ul(:class="['dropdown-menu', menuAlign === 'end' && 'dropdown-menu-end', isOpen && 'show']")
+    slot
 </template>

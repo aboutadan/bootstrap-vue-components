@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { Modal } from 'bootstrap'
+import { ref, watch, onBeforeUnmount, provide, nextTick } from 'vue'
 
 const props = defineProps<{
   modelValue?: boolean
@@ -14,39 +13,47 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
+const visible = ref(props.modelValue ?? false)
 const modalRef = ref<HTMLElement | null>(null)
-let bsModal: Modal | null = null
 
-onMounted(() => {
-  if (!modalRef.value) return
-  bsModal = new Modal(modalRef.value, {
-    backdrop: props.staticBackdrop ? 'static' : true,
-    keyboard: !props.staticBackdrop,
-  })
+function open() {
+  visible.value = true
+  document.body.classList.add('modal-open')
+  nextTick(() => modalRef.value?.focus())
+}
 
-  modalRef.value.addEventListener('hidden.bs.modal', () => {
-    emit('update:modelValue', false)
-  })
+function close() {
+  visible.value = false
+  document.body.classList.remove('modal-open')
+  emit('update:modelValue', false)
+}
 
-  if (props.modelValue) {
-    bsModal.show()
-  }
-})
+provide('modal-close', close)
 
-watch(() => props.modelValue, (show) => {
-  if (!bsModal) return
-  if (show) bsModal.show()
-  else bsModal.hide()
+function onBackdropClick(e: MouseEvent) {
+  if (props.staticBackdrop) return
+  if (e.target === modalRef.value) close()
+}
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape' && !props.staticBackdrop) close()
+}
+
+watch(() => props.modelValue, (val) => {
+  if (val) open()
+  else if (visible.value) close()
 })
 
 onBeforeUnmount(() => {
-  bsModal?.dispose()
+  document.body.classList.remove('modal-open')
 })
 </script>
 
 <template lang="pug">
-div.modal.fade(ref="modalRef" tabindex="-1")
-  div(:class="[ 'modal-dialog', size && `modal-${size}`, centered && 'modal-dialog-centered', scrollable && 'modal-dialog-scrollable', ]")
-    div.modal-content
-      slot
+div(v-if="visible")
+  div.modal.fade.show.d-block(ref="modalRef" tabindex="-1" @click="onBackdropClick" @keydown="onKeydown")
+    div(:class="[ 'modal-dialog', size && `modal-${size}`, centered && 'modal-dialog-centered', scrollable && 'modal-dialog-scrollable', ]")
+      div.modal-content
+        slot
+  div.modal-backdrop.fade.show
 </template>

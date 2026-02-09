@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, provide, watch, onMounted, onBeforeUnmount, computed } from 'vue'
-import { Carousel } from 'bootstrap'
 import { useId } from '../../composables/useId'
 
 const props = defineProps<{
@@ -16,50 +15,75 @@ const emit = defineEmits<{
 }>()
 
 const carouselId = useId('carousel')
-const carouselRef = ref<HTMLElement | null>(null)
-let bsCarousel: Carousel | null = null
+const activeIndex = ref(props.modelValue ?? 0)
 const itemCount = ref(0)
 
 provide('carousel', {
-  register: () => itemCount.value++,
+  register: () => {
+    const idx = itemCount.value
+    itemCount.value++
+    return idx
+  },
+  activeIndex,
 })
 
 const indicatorIndices = computed(() => Array.from({ length: itemCount.value }, (_, i) => i))
 
-onMounted(() => {
-  if (!carouselRef.value) return
-  bsCarousel = new Carousel(carouselRef.value, {
-    interval: props.interval === false ? false : (props.interval ?? 5000),
-    wrap: true,
-  })
+function goTo(index: number) {
+  const count = itemCount.value
+  if (count === 0) return
+  activeIndex.value = ((index % count) + count) % count
+  emit('update:modelValue', activeIndex.value)
+}
 
-  carouselRef.value.addEventListener('slid.bs.carousel', (e: any) => {
-    emit('update:modelValue', e.to)
-  })
+function prev() {
+  goTo(activeIndex.value - 1)
+}
 
-  if (props.modelValue != null && props.modelValue > 0) {
-    bsCarousel.to(props.modelValue)
+function next() {
+  goTo(activeIndex.value + 1)
+}
+
+let timer: ReturnType<typeof setInterval> | null = null
+
+function startAutoPlay() {
+  stopAutoPlay()
+  if (props.interval === false) return
+  const ms = props.interval ?? 5000
+  timer = setInterval(() => next(), ms)
+}
+
+function stopAutoPlay() {
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
+}
+
+watch(() => props.modelValue, (val) => {
+  if (val != null && val !== activeIndex.value) {
+    activeIndex.value = val
   }
 })
 
-watch(() => props.modelValue, (idx) => {
-  if (bsCarousel && idx != null) bsCarousel.to(idx)
+onMounted(() => {
+  startAutoPlay()
 })
 
 onBeforeUnmount(() => {
-  bsCarousel?.dispose()
+  stopAutoPlay()
 })
 </script>
 
 <template lang="pug">
-div(:id="carouselId" ref="carouselRef" :class="['carousel slide', fade && 'carousel-fade']")
+div(:id="carouselId" :class="['carousel slide', fade && 'carousel-fade']")
   div.carousel-indicators(v-if="indicators")
-    button(v-for="i in indicatorIndices" :key="i" type="button" :data-bs-target="`#${carouselId}`" :data-bs-slide-to="i" :class="{ active: i === (modelValue ?? 0) }")
+    button(v-for="i in indicatorIndices" :key="i" type="button" :class="{ active: i === activeIndex }" @click="goTo(i)")
   div.carousel-inner
     slot
   template(v-if="controls")
-    button.carousel-control-prev(type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="prev")
+    button.carousel-control-prev(type="button" @click="prev")
       span.carousel-control-prev-icon
-    button.carousel-control-next(type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="next")
+    button.carousel-control-next(type="button" @click="next")
       span.carousel-control-next-icon
 </template>

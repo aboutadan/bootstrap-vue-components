@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide } from 'vue'
+import { provide, reactive } from 'vue'
 import { useId } from '../../composables/useId'
 
 const props = defineProps<{
@@ -8,10 +8,20 @@ const props = defineProps<{
 }>()
 
 const accordionId = useId('accordion')
+const openItems = reactive(new Set<string>())
 
 provide('accordion', {
   id: accordionId,
   alwaysOpen: props.alwaysOpen ?? false,
+  openItems,
+  toggle(itemId: string) {
+    if (openItems.has(itemId)) {
+      openItems.delete(itemId)
+    } else {
+      if (!props.alwaysOpen) openItems.clear()
+      openItems.add(itemId)
+    }
+  },
 })
 </script>
 

@@ -58,10 +58,6 @@ import VPagination from './components/navigation/VPagination.vue'
 import VTab from './components/navigation/VTab.vue'
 import VTabs from './components/navigation/VTabs.vue'
 
-// Directives
-import vTooltip from './directives/vTooltip'
-import vPopover from './directives/vPopover'
-
 // Composables
 export { useId } from './composables/useId'
 export { useValidation } from './composables/useValidation'
@@ -126,10 +122,6 @@ export default {
     app.component('v-pagination', VPagination)
     app.component('v-tab', VTab)
     app.component('v-tabs', VTabs)
-
-    // Directives
-    app.directive('tooltip', vTooltip)
-    app.directive('popover', vPopover)
   },
 }
 
@@ -186,7 +178,4 @@ export {
   VPagination,
   VTab,
   VTabs,
-  // Directives
-  vTooltip,
-  vPopover,
 }
