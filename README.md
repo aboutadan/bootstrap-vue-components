@@ -5,7 +5,7 @@ A Vue 3 component library built on Bootstrap's SCSS — without Bootstrap's Java
 ## Requirements
 
 - **Vue** `^3.5.0`
-- **Sass** (for compiling the bundled Bootstrap SCSS)
+- **Bootstrap CSS** — bring your own via npm, CDN, or use the bundled SCSS (see [Styles](#styles))
 
 The tooltip and popover directives are **optional** and require `bootstrap` + `@popperjs/core` if used. See [Directives](#directives) below.
 
@@ -20,7 +20,6 @@ npm install adams-custom-vue-ui
 ```js
 import { createApp } from "vue";
 import AdamsUI from "adams-custom-vue-ui";
-import "adams-custom-vue-ui/src/scss/style.scss";
 
 const app = createApp(App);
 app.use(AdamsUI);
@@ -39,25 +38,26 @@ Import only what you need and register components locally or globally.
 
 ## Styles
 
-The package vendors Bootstrap's SCSS source. Import the pre-configured stylesheet:
+The components rely on Bootstrap's CSS classes but **don't ship their own styles**. You provide Bootstrap CSS however you prefer:
+
+**Option A — Your own Bootstrap install (recommended)**
+
+```bash
+npm i bootstrap@5.3.8 bootstrap-icons
+```
+
+```scss
+// your app's main stylesheet
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+```
+
+**Option B — Use the bundled SCSS**
+
+This package vendors Bootstrap's SCSS source as a convenience. If you don't already have Bootstrap in your project, you can import it directly:
 
 ```scss
 @import "adams-custom-vue-ui/src/scss/style.scss";
-```
-
-Or import Bootstrap's SCSS modules individually to customise variables and includes:
-
-```scss
-@import "adams-custom-vue-ui/src/scss/bootstrap/functions";
-@import "adams-custom-vue-ui/src/scss/bootstrap/variables";
-@import "adams-custom-vue-ui/src/scss/bootstrap/mixins";
-@import "adams-custom-vue-ui/src/scss/bootstrap/bootstrap";
-```
-
-Bootstrap Icons are also bundled:
-
-```scss
-@import "adams-custom-vue-ui/src/scss/bootstrap-icons/font/bootstrap-icons.css";
 ```
 
 ## Components
