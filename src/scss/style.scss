@@ -1,0 +1,16 @@
+html {
+  font-size: 14px;
+}
+
+$primary: #736598;
+
+@import "./bootstrap/bootstrap";
+@import "./bootstrap-icons/font/bootstrap-icons.css";
+
+body {
+  min-height: 100vh;
+}
+
+.red {
+  border: red solid 1px;
+}
