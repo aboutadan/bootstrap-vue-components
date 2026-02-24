@@ -1,6 +1,8 @@
-# Adams Custom Vue UI
+# bootstrap-vue-components
 
 A Vue 3 component library built on Bootstrap's SCSS — without Bootstrap's JavaScript. All interactivity is handled with pure Vue reactivity, so the only runtime dependency is Vue itself.
+
+> **Note:** This is a work in progress. The library is functional but not feature-complete, and documentation is still being written. Things may change and some components may be underdocumented for now.
 
 ## Requirements
 
@@ -12,17 +14,17 @@ The tooltip and popover directives are **optional** and require `bootstrap` + `@
 ## Installation
 
 ```bash
-npm install adams-custom-vue-ui
+npm install bootstrap-vue-components
 ```
 
 ### Global Registration (Plugin)
 
 ```js
 import { createApp } from "vue";
-import AdamsUI from "adams-custom-vue-ui";
+import BootstrapVueComponents from "bootstrap-vue-components";
 
 const app = createApp(App);
-app.use(AdamsUI);
+app.use(BootstrapVueComponents);
 app.mount("#app");
 ```
 
@@ -31,7 +33,7 @@ This registers every component globally so you can use them directly in template
 ### Tree-Shakeable Imports
 
 ```js
-import { VButton, VCard, VModal } from "adams-custom-vue-ui";
+import { VButton, VCard, VModal } from "bootstrap-vue-components";
 ```
 
 Import only what you need and register components locally or globally.
@@ -57,7 +59,7 @@ npm i bootstrap@5.3.8 bootstrap-icons
 This package vendors Bootstrap's SCSS source as a convenience. If you don't already have Bootstrap in your project, you can import it directly:
 
 ```scss
-@import "adams-custom-vue-ui/src/scss/style.scss";
+@import "bootstrap-vue-components/src/scss/style.scss";
 ```
 
 ## Components
@@ -169,7 +171,7 @@ const showModal = ref(false);
 
 | Component        | Description                                                                  |
 | ---------------- | ---------------------------------------------------------------------------- |
-| `VButton`        | Button — props: `variant`, `size`, `disabled`, `type`, `block`               |
+| `VButton`        | Button — props: `variant`, `size`, `small`, `disabled`, `type`, `block`      |
 | `VButtonGroup`   | Button group — props: `size`, `vertical`                                     |
 | `VCollapse`      | Collapsible content — props: `modelValue`, `horizontal`                      |
 | `VAccordion`     | Accordion container — props: `flush`, `alwaysOpen`                           |
@@ -228,7 +230,7 @@ const showModal = ref(false);
 | `VNavbar`          | Responsive navbar — props: `brand`, `expand`, `bg`, `variant`, `fixed`, `sticky` |
 | `VNav`             | Nav container — props: `pills`, `underline`, `fill`, `justified`, `vertical`     |
 | `VNavItem`         | Nav link — props: `href`, `to`, `active`, `disabled`                             |
-| `VDropdown`        | Dropdown menu — props: `text`, `variant`, `direction`, `split`, `menuAlign`      |
+| `VDropdown`        | Dropdown menu — props: `text`, `variant`, `direction`, `split`, `menuAlign`, `small`, `borderNone` |
 | `VDropdownItem`    | Dropdown menu item — props: `href`, `to`, `active`, `disabled`, `header`         |
 | `VDropdownDivider` | Dropdown divider                                                                 |
 | `VBreadcrumb`      | Breadcrumb — props: `divider`                                                    |
@@ -240,7 +242,7 @@ const showModal = ref(false);
 ## Composables
 
 ```js
-import { useId, useValidation } from "adams-custom-vue-ui";
+import { useId, useValidation } from "bootstrap-vue-components";
 ```
 
 | Composable                          | Description                                                                                                                |
@@ -261,8 +263,8 @@ npm install bootstrap @popperjs/core
 **Registration:**
 
 ```js
-import vTooltip from "adams-custom-vue-ui/directives/tooltip";
-import vPopover from "adams-custom-vue-ui/directives/popover";
+import vTooltip from "bootstrap-vue-components/directives/tooltip";
+import vPopover from "bootstrap-vue-components/directives/popover";
 
 app.directive("tooltip", vTooltip);
 app.directive("popover", vPopover);
@@ -277,6 +279,10 @@ app.directive("popover", vPopover);
 <button v-popover="{ title: 'Help', content: 'Details here' }">Info</button>
 <button v-popover:right="'Simple popover text'">More</button>
 ```
+
+## Contributing & Feedback
+
+Have a suggestion, found a bug, or want to request a feature? Feel free to [open an issue](https://github.com/aboutadan/custom_vue_ui/issues) on GitHub.
 
 ## License
 
