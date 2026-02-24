@@ -282,7 +282,7 @@ app.directive("popover", vPopover);
 
 ## Contributing & Feedback
 
-Have a suggestion, found a bug, or want to request a feature? Feel free to [open an issue](https://github.com/aboutadan/custom_vue_ui/issues) on GitHub.
+Have a suggestion, found a bug, or want to request a feature? Feel free to [open an issue](https://github.com/aboutadan/bootstrap-vue-components/issues) on GitHub.
 
 ## License
 
