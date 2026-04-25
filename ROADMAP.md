@@ -38,15 +38,15 @@ Shipped 2026-04-25. Consumers `npm install` and get ESM + CJS + `.d.ts`.
 
 ---
 
-## v2.2 — Modal accessibility + shared composables
+## v2.2 — Modal accessibility + shared composables ✓
 
-**Goal:** deliver on the "better than Bootstrap JS" promise where it matters most.
+Shipped 2026-04-25.
 
-- [ ] Focus trap in `VModal` (focusable elements stay inside while open)
-- [ ] Restore focus to trigger element on close
-- [ ] `aria-modal`, `aria-labelledby` wiring (auto-link to `VModalHeader` title)
-- [ ] Reference-counted `modal-open` body class (don't strip it while another modal is open)
-- [ ] Extract `useClickOutside` composable; refactor `VDropdown`, `VNavbar` to use it
+- [x] Focus trap in `VModal` (focusable elements stay inside while open)
+- [x] Restore focus to trigger element on close
+- [x] `aria-modal`, `aria-labelledby` wiring (auto-link to `VModalHeader` title)
+- [x] Reference-counted `modal-open` body class (don't strip it while another modal is open)
+- [x] Extract `useClickOutside` composable; refactor `VDropdown` to use it (`VNavbar` doesn't have click-outside logic, so no refactor needed; `VOffcanvas` has similar modal patterns and could use the same a11y treatment in a later phase)
 
 ---
 

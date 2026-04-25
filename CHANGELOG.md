@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [2.2.0] — 2026-04-25
+
+### Added
+
+- `VModal` now traps Tab/Shift+Tab focus inside the dialog while open and restores focus to the triggering element on close.
+- `VModal` exposes proper ARIA: `role="dialog"`, `aria-modal="true"`, and `aria-labelledby` automatically wired to `VModalHeader`'s title id.
+- New `useClickOutside` composable (also exported from the package).
+
+### Changed
+
+- `VModal`'s `modal-open` body class is now reference-counted, so closing one modal no longer strips the class while another modal is still open.
+- `VDropdown` refactored to use `useClickOutside` instead of an inline document listener.
+
 ## [2.1.0] — 2026-04-25
 
 ### Added
