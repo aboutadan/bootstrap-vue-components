@@ -23,7 +23,7 @@ const form = inject<Record<string, any>>("form", {});
 const switchId = computed(() => props.id ?? useId("switch"));
 const { validationClass, feedbackType } = useValidation(
   toRef(props, "isValid"),
-  toRef(props, "helpText"),
+  toRef(props, "helpText")
 );
 
 function onChange(event: Event) {

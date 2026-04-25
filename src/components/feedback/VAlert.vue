@@ -13,7 +13,7 @@ const props = withDefaults(
     modelValue: true,
     variant: "primary",
     dismissible: false,
-  },
+  }
 );
 
 const emit = defineEmits<{
@@ -27,7 +27,7 @@ watch(
   () => props.modelValue,
   (v) => {
     visible.value = v !== false;
-  },
+  }
 );
 
 function dismiss() {

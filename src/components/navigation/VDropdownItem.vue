@@ -1,15 +1,15 @@
 <script setup lang="ts">
 defineProps<{
-  href?: string
-  to?: string
-  active?: boolean
-  disabled?: boolean
-  header?: boolean
-}>()
+  href?: string;
+  to?: string;
+  active?: boolean;
+  disabled?: boolean;
+  header?: boolean;
+}>();
 
 defineEmits<{
-  click: [event: MouseEvent]
-}>()
+  click: [event: MouseEvent];
+}>();
 </script>
 
 <template lang="pug">

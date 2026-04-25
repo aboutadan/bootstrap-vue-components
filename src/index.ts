@@ -71,63 +71,63 @@ export type { BootstrapVariant, BootstrapButtonVariant } from "./types";
 export default {
   install(app: App) {
     // Cards
-    app.component("v-card", VCard);
-    app.component("v-card-header", VCardHeader);
-    app.component("v-card-body", VCardBody);
-    app.component("v-card-footer", VCardFooter);
+    app.component("VCard", VCard);
+    app.component("VCardHeader", VCardHeader);
+    app.component("VCardBody", VCardBody);
+    app.component("VCardFooter", VCardFooter);
 
     // Data
-    app.component("v-list-group", VListGroup);
-    app.component("v-list-group-item", VListGroupItem);
-    app.component("v-table", VTable);
+    app.component("VListGroup", VListGroup);
+    app.component("VListGroupItem", VListGroupItem);
+    app.component("VTable", VTable);
 
     // Feedback
-    app.component("v-alert", VAlert);
-    app.component("v-badge", VBadge);
-    app.component("v-placeholder", VPlaceholder);
-    app.component("v-progress", VProgress);
-    app.component("v-progress-bar", VProgressBar);
-    app.component("v-spinner", VSpinner);
+    app.component("VAlert", VAlert);
+    app.component("VBadge", VBadge);
+    app.component("VPlaceholder", VPlaceholder);
+    app.component("VProgress", VProgress);
+    app.component("VProgressBar", VProgressBar);
+    app.component("VSpinner", VSpinner);
 
     // Forms
-    app.component("v-label", VLabel);
-    app.component("v-checkbox", VCheckbox);
-    app.component("v-input", VInput);
-    app.component("v-input-group", VInputGroup);
-    app.component("v-radio", VRadio);
-    app.component("v-select", VSelect);
-    app.component("v-switch", VSwitch);
-    app.component("v-textarea", VTextarea);
+    app.component("VLabel", VLabel);
+    app.component("VCheckbox", VCheckbox);
+    app.component("VInput", VInput);
+    app.component("VInputGroup", VInputGroup);
+    app.component("VRadio", VRadio);
+    app.component("VSelect", VSelect);
+    app.component("VSwitch", VSwitch);
+    app.component("VTextarea", VTextarea);
 
     // Interactive
-    app.component("v-accordion", VAccordion);
-    app.component("v-accordion-item", VAccordionItem);
-    app.component("v-button", VButton);
-    app.component("v-button-group", VButtonGroup);
-    app.component("v-carousel", VCarousel);
-    app.component("v-carousel-item", VCarouselItem);
-    app.component("v-collapse", VCollapse);
+    app.component("VAccordion", VAccordion);
+    app.component("VAccordionItem", VAccordionItem);
+    app.component("VButton", VButton);
+    app.component("VButtonGroup", VButtonGroup);
+    app.component("VCarousel", VCarousel);
+    app.component("VCarouselItem", VCarouselItem);
+    app.component("VCollapse", VCollapse);
 
     // Modals
-    app.component("v-modal", VModal);
-    app.component("v-modal-footer", VModalFooter);
-    app.component("v-modal-header", VModalHeader);
-    app.component("v-offcanvas", VOffcanvas);
-    app.component("v-toast", VToast);
-    app.component("v-toast-container", VToastContainer);
+    app.component("VModal", VModal);
+    app.component("VModalFooter", VModalFooter);
+    app.component("VModalHeader", VModalHeader);
+    app.component("VOffcanvas", VOffcanvas);
+    app.component("VToast", VToast);
+    app.component("VToastContainer", VToastContainer);
 
     // Navigation
-    app.component("v-breadcrumb", VBreadcrumb);
-    app.component("v-breadcrumb-item", VBreadcrumbItem);
-    app.component("v-dropdown", VDropdown);
-    app.component("v-dropdown-divider", VDropdownDivider);
-    app.component("v-dropdown-item", VDropdownItem);
-    app.component("v-nav", VNav);
-    app.component("v-nav-item", VNavItem);
-    app.component("v-navbar", VNavbar);
-    app.component("v-pagination", VPagination);
-    app.component("v-tab", VTab);
-    app.component("v-tabs", VTabs);
+    app.component("VBreadcrumb", VBreadcrumb);
+    app.component("VBreadcrumbItem", VBreadcrumbItem);
+    app.component("VDropdown", VDropdown);
+    app.component("VDropdownDivider", VDropdownDivider);
+    app.component("VDropdownItem", VDropdownItem);
+    app.component("VNav", VNav);
+    app.component("VNavItem", VNavItem);
+    app.component("VNavbar", VNavbar);
+    app.component("VPagination", VPagination);
+    app.component("VTab", VTab);
+    app.component("VTabs", VTabs);
   },
 };
 

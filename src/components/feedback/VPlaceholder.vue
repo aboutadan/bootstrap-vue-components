@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { BootstrapVariant } from '../../types'
+import type { BootstrapVariant } from "../../types";
 
 defineProps<{
-  cols?: number | string
-  variant?: BootstrapVariant
-  size?: 'xs' | 'sm' | 'lg'
-  animation?: 'glow' | 'wave'
-}>()
+  cols?: number | string;
+  variant?: BootstrapVariant;
+  size?: "xs" | "sm" | "lg";
+  animation?: "glow" | "wave";
+}>();
 </script>
 
 <template lang="pug">

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { BootstrapVariant } from '../../types'
+import type { BootstrapVariant } from "../../types";
 
 defineProps<{
-  active?: boolean
-  disabled?: boolean
-  variant?: BootstrapVariant
-  href?: string
-  to?: string
-}>()
+  active?: boolean;
+  disabled?: boolean;
+  variant?: BootstrapVariant;
+  href?: string;
+  to?: string;
+}>();
 
 defineEmits<{
-  click: [event: MouseEvent]
-}>()
+  click: [event: MouseEvent];
+}>();
 </script>
 
 <template lang="pug">

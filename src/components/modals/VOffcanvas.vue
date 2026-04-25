@@ -1,53 +1,58 @@
 <script setup lang="ts">
-import { ref, watch, onBeforeUnmount } from 'vue'
+import { ref, watch, onBeforeUnmount } from "vue";
 
 const props = defineProps<{
-  modelValue?: boolean
-  title?: string
-  placement?: 'start' | 'end' | 'top' | 'bottom'
-  backdrop?: boolean
-  scroll?: boolean
-}>()
+  modelValue?: boolean;
+  title?: string;
+  placement?: "start" | "end" | "top" | "bottom";
+  backdrop?: boolean;
+  scroll?: boolean;
+}>();
 
 const emit = defineEmits<{
-  'update:modelValue': [value: boolean]
-}>()
+  "update:modelValue": [value: boolean];
+}>();
 
-const visible = ref(props.modelValue ?? false)
-const showing = ref(false)
-const hiding = ref(false)
+const visible = ref(props.modelValue ?? false);
+const showing = ref(false);
+const hiding = ref(false);
 
 function open() {
-  visible.value = true
-  showing.value = true
-  setTimeout(() => { showing.value = false }, 300)
+  visible.value = true;
+  showing.value = true;
+  setTimeout(() => {
+    showing.value = false;
+  }, 300);
 }
 
 function close() {
-  hiding.value = true
+  hiding.value = true;
   setTimeout(() => {
-    visible.value = false
-    hiding.value = false
-    emit('update:modelValue', false)
-  }, 300)
+    visible.value = false;
+    hiding.value = false;
+    emit("update:modelValue", false);
+  }, 300);
 }
 
 function onBackdropClick() {
-  close()
+  close();
 }
 
 function onKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape') close()
+  if (e.key === "Escape") close();
 }
 
-watch(() => props.modelValue, (val) => {
-  if (val) open()
-  else if (visible.value) close()
-})
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (val) open();
+    else if (visible.value) close();
+  }
+);
 
 onBeforeUnmount(() => {
-  visible.value = false
-})
+  visible.value = false;
+});
 </script>
 
 <template lang="pug">

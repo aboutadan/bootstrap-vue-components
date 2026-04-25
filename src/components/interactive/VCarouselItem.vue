@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { inject, onMounted, ref, type Ref, computed } from 'vue'
+import { inject, onMounted, ref, type Ref, computed } from "vue";
 
 defineProps<{
-  imgSrc?: string
-  caption?: string
-}>()
+  imgSrc?: string;
+  caption?: string;
+}>();
 
 const carousel = inject<{
-  register: () => number
-  activeIndex: Ref<number>
-}>('carousel')
+  register: () => number;
+  activeIndex: Ref<number>;
+}>("carousel");
 
-const ownIndex = ref(-1)
+const ownIndex = ref(-1);
 
 onMounted(() => {
   if (carousel) {
-    ownIndex.value = carousel.register()
+    ownIndex.value = carousel.register();
   }
-})
+});
 
-const isActive = computed(() => ownIndex.value === carousel?.activeIndex.value)
+const isActive = computed(() => ownIndex.value === carousel?.activeIndex.value);
 </script>
 
 <template lang="pug">

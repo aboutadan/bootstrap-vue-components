@@ -1,11 +1,11 @@
 <script setup lang="ts">
 defineProps<{
-  pills?: boolean
-  underline?: boolean
-  fill?: boolean
-  justified?: boolean
-  vertical?: boolean
-}>()
+  pills?: boolean;
+  underline?: boolean;
+  fill?: boolean;
+  justified?: boolean;
+  vertical?: boolean;
+}>();
 </script>
 
 <template lang="pug">

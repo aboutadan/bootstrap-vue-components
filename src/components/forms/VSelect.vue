@@ -36,17 +36,17 @@ const props = defineProps({
 const form = inject<Record<string, any>>("form", {});
 
 const selectId = computed(
-  () => props.id ?? (props.label ? useId("select") : undefined),
+  () => props.id ?? (props.label ? useId("select") : undefined)
 );
 const { validationClass, feedbackType } = useValidation(
   toRef(props, "isValid"),
-  toRef(props, "helpText"),
+  toRef(props, "helpText")
 );
 
 const normalizedOptions = computed(() =>
   (props.options ?? []).map((o) =>
-    typeof o === "string" ? { value: o, text: o } : o,
-  ),
+    typeof o === "string" ? { value: o, text: o } : o
+  )
 );
 
 function onChange(event: Event) {

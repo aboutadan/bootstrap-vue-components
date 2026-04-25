@@ -12,11 +12,23 @@ export default [
   {
     rules: {
       "vue/multi-word-component-names": "off",
+      "vue/require-default-prop": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+    },
+  },
+  {
+    // Pug templates are opaque to the Vue ESLint parser, so script-level
+    // bindings only used in <template lang="pug"> get false-positive
+    // unused-var errors. Disable that rule for .vue files until/unless we
+    // wire up a pug-aware parser.
+    files: ["**/*.vue"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "vue/component-definition-name-casing": "off",
     },
   },
 ];

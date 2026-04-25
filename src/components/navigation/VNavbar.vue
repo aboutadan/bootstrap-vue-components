@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useId } from '../../composables/useId'
+import { ref } from "vue";
+import { useId } from "../../composables/useId";
 
 defineProps<{
-  brand?: string
-  expand?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-  bg?: string
-  variant?: 'dark' | 'light'
-  fixed?: 'top' | 'bottom'
-  sticky?: 'top'
-}>()
+  brand?: string;
+  expand?: "sm" | "md" | "lg" | "xl" | "xxl";
+  bg?: string;
+  variant?: "dark" | "light";
+  fixed?: "top" | "bottom";
+  sticky?: "top";
+}>();
 
-const collapseId = useId('navbar')
-const isOpen = ref(false)
+const collapseId = useId("navbar");
+const isOpen = ref(false);
 </script>
 
 <template lang="pug">

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 defineProps<{
-  href?: string
-  to?: string
-  active?: boolean
-}>()
+  href?: string;
+  to?: string;
+  active?: boolean;
+}>();
 </script>
 
 <template lang="pug">

@@ -1,78 +1,83 @@
 <script setup lang="ts">
-import { ref, provide, watch, onMounted, onBeforeUnmount, computed } from 'vue'
-import { useId } from '../../composables/useId'
+import { ref, provide, watch, onMounted, onBeforeUnmount, computed } from "vue";
+import { useId } from "../../composables/useId";
 
 const props = defineProps<{
-  modelValue?: number
-  controls?: boolean
-  indicators?: boolean
-  fade?: boolean
-  interval?: number | false
-}>()
+  modelValue?: number;
+  controls?: boolean;
+  indicators?: boolean;
+  fade?: boolean;
+  interval?: number | false;
+}>();
 
 const emit = defineEmits<{
-  'update:modelValue': [value: number]
-}>()
+  "update:modelValue": [value: number];
+}>();
 
-const carouselId = useId('carousel')
-const activeIndex = ref(props.modelValue ?? 0)
-const itemCount = ref(0)
+const carouselId = useId("carousel");
+const activeIndex = ref(props.modelValue ?? 0);
+const itemCount = ref(0);
 
-provide('carousel', {
+provide("carousel", {
   register: () => {
-    const idx = itemCount.value
-    itemCount.value++
-    return idx
+    const idx = itemCount.value;
+    itemCount.value++;
+    return idx;
   },
   activeIndex,
-})
+});
 
-const indicatorIndices = computed(() => Array.from({ length: itemCount.value }, (_, i) => i))
+const indicatorIndices = computed(() =>
+  Array.from({ length: itemCount.value }, (_, i) => i)
+);
 
 function goTo(index: number) {
-  const count = itemCount.value
-  if (count === 0) return
-  activeIndex.value = ((index % count) + count) % count
-  emit('update:modelValue', activeIndex.value)
+  const count = itemCount.value;
+  if (count === 0) return;
+  activeIndex.value = ((index % count) + count) % count;
+  emit("update:modelValue", activeIndex.value);
 }
 
 function prev() {
-  goTo(activeIndex.value - 1)
+  goTo(activeIndex.value - 1);
 }
 
 function next() {
-  goTo(activeIndex.value + 1)
+  goTo(activeIndex.value + 1);
 }
 
-let timer: ReturnType<typeof setInterval> | null = null
+let timer: ReturnType<typeof setInterval> | null = null;
 
 function startAutoPlay() {
-  stopAutoPlay()
-  if (props.interval === false) return
-  const ms = props.interval ?? 5000
-  timer = setInterval(() => next(), ms)
+  stopAutoPlay();
+  if (props.interval === false) return;
+  const ms = props.interval ?? 5000;
+  timer = setInterval(() => next(), ms);
 }
 
 function stopAutoPlay() {
   if (timer) {
-    clearInterval(timer)
-    timer = null
+    clearInterval(timer);
+    timer = null;
   }
 }
 
-watch(() => props.modelValue, (val) => {
-  if (val != null && val !== activeIndex.value) {
-    activeIndex.value = val
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (val != null && val !== activeIndex.value) {
+      activeIndex.value = val;
+    }
   }
-})
+);
 
 onMounted(() => {
-  startAutoPlay()
-})
+  startAutoPlay();
+});
 
 onBeforeUnmount(() => {
-  stopAutoPlay()
-})
+  stopAutoPlay();
+});
 </script>
 
 <template lang="pug">

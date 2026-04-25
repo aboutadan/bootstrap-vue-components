@@ -10,5 +10,7 @@ export function useClickOutside(
     }
   }
   onMounted(() => document.addEventListener("click", onDocClick, true));
-  onBeforeUnmount(() => document.removeEventListener("click", onDocClick, true));
+  onBeforeUnmount(() =>
+    document.removeEventListener("click", onDocClick, true)
+  );
 }

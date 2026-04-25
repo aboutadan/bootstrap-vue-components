@@ -26,7 +26,7 @@ const form = inject<Record<string, any>>("form", {});
 const checkId = computed(() => props.id ?? useId("check"));
 const { validationClass, feedbackType } = useValidation(
   toRef(props, "isValid"),
-  toRef(props, "helpText"),
+  toRef(props, "helpText")
 );
 
 const isChecked = computed(() => {

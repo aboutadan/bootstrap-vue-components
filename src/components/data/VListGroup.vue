@@ -1,9 +1,9 @@
 <script setup lang="ts">
 defineProps<{
-  flush?: boolean
-  horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-  numbered?: boolean
-}>()
+  flush?: boolean;
+  horizontal?: boolean | "sm" | "md" | "lg" | "xl" | "xxl";
+  numbered?: boolean;
+}>();
 </script>
 
 <template lang="pug">

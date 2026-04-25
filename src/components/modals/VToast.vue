@@ -1,45 +1,49 @@
 <script setup lang="ts">
-import { watch, onBeforeUnmount } from 'vue'
-import type { BootstrapVariant } from '../../types'
+import { watch, onBeforeUnmount } from "vue";
+import type { BootstrapVariant } from "../../types";
 
 const props = defineProps<{
-  modelValue?: boolean
-  title?: string
-  variant?: BootstrapVariant
-  autohide?: boolean
-  delay?: number
-}>()
+  modelValue?: boolean;
+  title?: string;
+  variant?: BootstrapVariant;
+  autohide?: boolean;
+  delay?: number;
+}>();
 
 const emit = defineEmits<{
-  'update:modelValue': [value: boolean]
-}>()
+  "update:modelValue": [value: boolean];
+}>();
 
-let timer: ReturnType<typeof setTimeout> | null = null
+let timer: ReturnType<typeof setTimeout> | null = null;
 
 function clearTimer() {
   if (timer) {
-    clearTimeout(timer)
-    timer = null
+    clearTimeout(timer);
+    timer = null;
   }
 }
 
 function startTimer() {
-  clearTimer()
+  clearTimer();
   if (props.autohide !== false) {
     timer = setTimeout(() => {
-      emit('update:modelValue', false)
-    }, props.delay ?? 5000)
+      emit("update:modelValue", false);
+    }, props.delay ?? 5000);
   }
 }
 
-watch(() => props.modelValue, (show) => {
-  if (show) startTimer()
-  else clearTimer()
-}, { immediate: true })
+watch(
+  () => props.modelValue,
+  (show) => {
+    if (show) startTimer();
+    else clearTimer();
+  },
+  { immediate: true }
+);
 
 onBeforeUnmount(() => {
-  clearTimer()
-})
+  clearTimer();
+});
 </script>
 
 <template lang="pug">

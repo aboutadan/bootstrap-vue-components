@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 
 const props = defineProps<{
-  divider?: string
-}>()
+  divider?: string;
+}>();
 
 const breadcrumbStyle = computed(() =>
-  props.divider ? { '--bs-breadcrumb-divider': `'${props.divider}'` } : undefined,
-)
+  props.divider
+    ? { "--bs-breadcrumb-divider": `'${props.divider}'` }
+    : undefined
+);
 </script>
 
 <template lang="pug">

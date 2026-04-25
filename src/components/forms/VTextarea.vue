@@ -27,12 +27,12 @@ const textareaId = computed(
     props.id ??
     (props.label
       ? `textarea-${props.label.toLowerCase().replace(/\s+/g, "-")}`
-      : undefined),
+      : undefined)
 );
 
 const { validationClass, feedbackType } = useValidation(
   toRef(props, "isValid"),
-  toRef(props, "helpText"),
+  toRef(props, "helpText")
 );
 
 function onInput(event: Event) {

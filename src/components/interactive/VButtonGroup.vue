@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  size?: 'sm' | 'lg'
-  vertical?: boolean
-}>()
+  size?: "sm" | "lg";
+  vertical?: boolean;
+}>();
 </script>
 
 <template lang="pug">

@@ -1,14 +1,14 @@
 <script setup lang="ts">
 defineProps<{
-  href?: string
-  to?: string
-  active?: boolean
-  disabled?: boolean
-}>()
+  href?: string;
+  to?: string;
+  active?: boolean;
+  disabled?: boolean;
+}>();
 
 defineEmits<{
-  click: [event: MouseEvent]
-}>()
+  click: [event: MouseEvent];
+}>();
 </script>
 
 <template lang="pug">

@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { inject, onMounted, onBeforeUnmount } from 'vue'
-import { useId } from '../../composables/useId'
+import { inject, onMounted, onBeforeUnmount } from "vue";
+import { useId } from "../../composables/useId";
 
 defineProps<{
-  title?: string
-  closeButton?: boolean
-}>()
+  title?: string;
+  closeButton?: boolean;
+}>();
 
-const close = inject<() => void>('modal-close', () => {})
-const setLabelId = inject<(id: string | null) => void>('modal-set-label-id', () => {})
-const titleId = useId('modal-title')
+const close = inject<() => void>("modal-close", () => {});
+const setLabelId = inject<(id: string | null) => void>(
+  "modal-set-label-id",
+  () => {}
+);
+const titleId = useId("modal-title");
 
-onMounted(() => setLabelId(titleId))
-onBeforeUnmount(() => setLabelId(null))
+onMounted(() => setLabelId(titleId));
+onBeforeUnmount(() => setLabelId(null));
 </script>
 
 <template lang="pug">

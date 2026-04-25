@@ -28,7 +28,7 @@ const form = inject<Record<string, any>>("form", {});
 const radioId = computed(() => props.id ?? useId("radio"));
 const { validationClass, feedbackType } = useValidation(
   toRef(props, "isValid"),
-  toRef(props, "helpText"),
+  toRef(props, "helpText")
 );
 </script>
 

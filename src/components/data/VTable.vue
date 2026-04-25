@@ -1,35 +1,37 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { BootstrapVariant } from '../../types'
+import { computed } from "vue";
+import type { BootstrapVariant } from "../../types";
 
 export interface TableField {
-  key: string
-  label?: string
-  variant?: BootstrapVariant
+  key: string;
+  label?: string;
+  variant?: BootstrapVariant;
 }
 
 const props = defineProps<{
-  items?: Record<string, any>[]
-  fields?: (string | TableField)[]
-  striped?: boolean
-  bordered?: boolean
-  hover?: boolean
-  small?: boolean
-  responsive?: boolean
-  variant?: BootstrapVariant
-}>()
+  items?: Record<string, any>[];
+  fields?: (string | TableField)[];
+  striped?: boolean;
+  bordered?: boolean;
+  hover?: boolean;
+  small?: boolean;
+  responsive?: boolean;
+  variant?: BootstrapVariant;
+}>();
 
 const normalizedFields = computed<TableField[]>(() => {
   if (props.fields) {
-    return props.fields.map(f => typeof f === 'string' ? { key: f, label: f } : f)
+    return props.fields.map((f) =>
+      typeof f === "string" ? { key: f, label: f } : f
+    );
   }
   if (props.items && props.items.length > 0) {
-    return Object.keys(props.items[0]!).map(key => ({ key, label: key }))
+    return Object.keys(props.items[0]!).map((key) => ({ key, label: key }));
   }
-  return []
-})
+  return [];
+});
 
-const hasItems = computed(() => props.items && props.items.length > 0)
+const hasItems = computed(() => props.items && props.items.length > 0);
 </script>
 
 <template lang="pug">
