@@ -72,14 +72,17 @@ Shipped 2026-04-25.
 
 ---
 
-## v2.5 — Docs site (later)
+## v2.5 — Docs site (minimum viable shipped)
 
-**Goal:** consumer-facing component reference with live examples.
+Shipped 2026-04-25 as a scaffold. Adding component pages is incremental work — each new page is a small PR.
 
-- [ ] Pick a docs framework (VitePress is the obvious fit for a Vue lib)
-- [ ] Auto-extract prop signatures from components (cix or vue-docgen)
-- [ ] Live demo for each component
-- [ ] Deploy to GitHub Pages
+- [x] VitePress in `docs/`, Vue plugin registered in the theme
+- [x] Landing page + Getting Started guide
+- [x] **VButton** as the component-page pattern (live demos, prop table, code samples)
+- [x] GitHub Pages deployment workflow (.github/workflows/deploy-docs.yml)
+- [ ] Component pages for the remaining ~37 components (write incrementally; pattern is set)
+- [ ] Auto-extract prop signatures (vue-docgen-api or cix `get_symbol`) — currently hand-written tables
+- [ ] Repo: enable Pages with "GitHub Actions" as source (one-time UI step)
 
 ---
 

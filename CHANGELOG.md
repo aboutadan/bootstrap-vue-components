@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [2.5.0] — 2026-04-25
+
+### Added
+
+- **Docs site scaffold** (VitePress) under `docs/`. Includes a landing page, a Getting Started guide ported from `wiki/`, and a `VButton` reference page with live demos that establishes the pattern for future component pages.
+- **GitHub Pages deployment workflow** (`.github/workflows/deploy-docs.yml`) — builds VitePress and deploys on every push to `main`.
+- New scripts: `docs:dev`, `docs:build`, `docs:preview`.
+
+### Note
+
+This release ships a minimum-viable docs site. Only `VButton` is documented; the remaining ~37 component pages are incremental work that follows the established pattern. To enable the deployed site, set the repository's Pages source to "GitHub Actions" (one-time setup in the repo UI).
+
 ## [2.4.0] — 2026-04-25
 
 ### Added
