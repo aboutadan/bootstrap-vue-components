@@ -60,15 +60,15 @@ Shipped 2026-04-25.
 
 ---
 
-## v2.4 — Quality floor
+## v2.4 — Quality floor ✓
 
-**Goal:** the basics every published library should have.
+Shipped 2026-04-25.
 
-- [ ] Add Vitest + `@vue/test-utils`
-- [ ] Tests for `VButton`, `VModal`, `VDropdown` (sets the pattern for other components)
-- [ ] ESLint config (Vue 3 + TypeScript)
-- [ ] Prettier config (resolve current single/double quote drift)
-- [ ] GitHub Actions: lint + typecheck + test on push/PR
+- [x] Add Vitest + `@vue/test-utils` + happy-dom
+- [x] Tests for `VButton`, `VModal`, `VDropdown` plus `useId`, `useValidation`, `useClickOutside` (37 tests across 6 files)
+- [x] ESLint flat config (Vue 3 + TypeScript) with sensible defaults for this codebase
+- [x] Prettier config (double quotes + semicolons + es5 trailing commas); whole codebase reformatted in one commit
+- [x] GitHub Actions: format:check + lint + typecheck + test + build on push/PR
 
 ---
 

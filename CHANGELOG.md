@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [2.4.0] — 2026-04-25
+
+### Added
+
+- **Test suite.** Vitest + `@vue/test-utils` + happy-dom. 37 tests covering `VButton`, `VModal`, `VDropdown`, `useId`, `useValidation`, and `useClickOutside`. Run with `npm test` (single run) or `npm run test:watch`.
+- **Lint and format.** ESLint flat config (`@vue/eslint-config-typescript` + `eslint-plugin-vue`) and Prettier (double quotes + semicolons + es5 trailing commas). New scripts: `lint`, `lint:fix`, `format`, `format:check`, `typecheck`.
+- **CI.** `.github/workflows/ci.yml` runs format check + lint + typecheck + test + build on every push and PR to main.
+
+### Fixed
+
+- `VButton`'s deprecation warning was firing on every mount (not just when `small` was actually used). Vue coerces optional Boolean prop defaults to `false`, so the previous `props.small !== undefined` check was always true. Caught by the new test that mounts `VButton` without the prop.
+
+### Changed
+
+- One-time formatting pass across `src/` to apply the Prettier style. Mixed quote style flagged in the v2.0 review is now consistent.
+- Component registration names in `src/index.ts` switched from kebab-case (`"v-card"`) to PascalCase (`"VCard"`) per ESLint auto-fix. Vue normalizes both at template lookup, so consumers using `<v-card>` or `<VCard>` are unaffected.
+
 ## [2.3.0] — 2026-04-25
 
 ### Added
