@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
+import type { BootstrapVariant } from "../../types";
 
 const props = withDefaults(
   defineProps<{
     modelValue?: boolean;
-    variant?: string;
+    variant?: BootstrapVariant;
     dismissible?: boolean;
     icon?: string;
   }>(),

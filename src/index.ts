@@ -64,6 +64,9 @@ export { useClickOutside } from "./composables/useClickOutside";
 export { useId } from "./composables/useId";
 export { useValidation } from "./composables/useValidation";
 
+// Types
+export type { BootstrapVariant, BootstrapButtonVariant } from "./types";
+
 // Plugin
 export default {
   install(app: App) {

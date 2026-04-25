@@ -1,16 +1,28 @@
 <script setup lang="ts">
-defineProps<{
-  variant?: string;
+import { onMounted } from "vue";
+import type { BootstrapButtonVariant } from "../../types";
+
+const props = defineProps<{
+  variant?: BootstrapButtonVariant;
   size?: "sm" | "lg";
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   block?: boolean;
+  /** @deprecated Use `size="sm"` instead. Will be removed in v3.0. */
   small?: boolean;
 }>();
 
 defineEmits<{
   click: [event: MouseEvent];
 }>();
+
+onMounted(() => {
+  if (props.small !== undefined) {
+    console.warn(
+      '[VButton] The `small` prop is deprecated and will be removed in v3.0. Use `size="sm"` instead.'
+    );
+  }
+});
 </script>
 
 <template lang="pug">

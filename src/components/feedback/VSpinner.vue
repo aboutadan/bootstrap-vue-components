@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { BootstrapVariant } from '../../types'
+
 defineProps<{
   type?: 'border' | 'grow'
-  variant?: string
+  variant?: BootstrapVariant
   size?: 'sm'
 }>()
 </script>

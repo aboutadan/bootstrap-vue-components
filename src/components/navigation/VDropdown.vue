@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useClickOutside } from "../../composables/useClickOutside";
+import type { BootstrapButtonVariant } from "../../types";
 
 const props = defineProps<{
   text?: string;
-  variant?: string;
+  variant?: BootstrapButtonVariant;
   direction?: "up" | "end" | "start";
   split?: boolean;
   menuAlign?: "end";

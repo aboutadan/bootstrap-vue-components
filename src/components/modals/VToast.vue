@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { watch, onBeforeUnmount } from 'vue'
+import type { BootstrapVariant } from '../../types'
 
 const props = defineProps<{
   modelValue?: boolean
   title?: string
-  variant?: string
+  variant?: BootstrapVariant
   autohide?: boolean
   delay?: number
 }>()

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { BootstrapVariant } from '../../types'
 
 export interface TableField {
   key: string
   label?: string
-  variant?: string
+  variant?: BootstrapVariant
 }
 
 const props = defineProps<{
@@ -15,7 +16,7 @@ const props = defineProps<{
   hover?: boolean
   small?: boolean
   responsive?: boolean
-  variant?: string
+  variant?: BootstrapVariant
 }>()
 
 const normalizedFields = computed<TableField[]>(() => {

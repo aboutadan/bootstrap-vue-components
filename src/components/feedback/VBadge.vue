@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { BootstrapVariant } from "../../types";
+
 defineProps<{
-  variant?: string;
+  variant?: BootstrapVariant;
   pill?: boolean;
   tag?: string;
 }>();

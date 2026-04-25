@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { BootstrapVariant } from '../../types'
+
 defineProps<{
   cols?: number | string
-  variant?: string
+  variant?: BootstrapVariant
   size?: 'xs' | 'sm' | 'lg'
   animation?: 'glow' | 'wave'
 }>()

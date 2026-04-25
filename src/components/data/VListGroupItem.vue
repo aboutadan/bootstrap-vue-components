@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { BootstrapVariant } from '../../types'
+
 defineProps<{
   active?: boolean
   disabled?: boolean
-  variant?: string
+  variant?: BootstrapVariant
   href?: string
   to?: string
 }>()
