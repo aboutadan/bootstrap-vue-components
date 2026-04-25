@@ -3,15 +3,41 @@
   "version": "2.0.0",
   "private": false,
   "type": "module",
-  "main": "./src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src/assets/scss"
+  ],
   "exports": {
-    ".": "./src/index.ts",
-    "./src/assets/scss/*": "./src/assets/scss/*",
-    "./directives/tooltip": "./src/directives/vTooltip.ts",
-    "./directives/popover": "./src/directives/vPopover.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./directives/tooltip": {
+      "types": "./dist/directives/tooltip.d.ts",
+      "import": "./dist/directives/tooltip.js",
+      "require": "./dist/directives/tooltip.cjs"
+    },
+    "./directives/popover": {
+      "types": "./dist/directives/popover.d.ts",
+      "import": "./dist/directives/popover.js",
+      "require": "./dist/directives/popover.cjs"
+    },
+    "./src/assets/scss/*": "./src/assets/scss/*"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "bootstrap": {
+      "optional": true
+    },
+    "@popperjs/core": {
+      "optional": true
+    }
   },
   "scripts": {
     "dev": "vite",
@@ -19,11 +45,15 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vue": "^3.5.24",
+    "@popperjs/core": "^2.11.8",
+    "@types/bootstrap": "^5.2.10",
     "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.2.4",
-    "typescript": "~5.9.3",
+    "bootstrap": "^5.3.8",
+    "pug": "^3.0.3",
     "sass": "^1.79.6",
-    "pug": "^3.0.3"
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vite-plugin-dts": "^4.5.4",
+    "vue": "^3.5.24"
   }
 }
