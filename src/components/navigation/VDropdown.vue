@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref } from "vue";
+import { useClickOutside } from "../../composables/useClickOutside";
 
 const props = defineProps<{
   text?: string;
@@ -31,19 +32,7 @@ function close() {
   emit("hide");
 }
 
-function onClickOutside(e: MouseEvent) {
-  if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
-    close();
-  }
-}
-
-onMounted(() => {
-  document.addEventListener("click", onClickOutside, true);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("click", onClickOutside, true);
-});
+useClickOutside(dropdownRef, () => close());
 
 const dirClass: Record<string, string> = {
   up: "dropup",

@@ -60,6 +60,7 @@ import VTab from "./components/navigation/VTab.vue";
 import VTabs from "./components/navigation/VTabs.vue";
 
 // Composables
+export { useClickOutside } from "./composables/useClickOutside";
 export { useId } from "./composables/useId";
 export { useValidation } from "./composables/useValidation";
 
