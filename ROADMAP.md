@@ -34,7 +34,7 @@ Shipped 2026-04-25. Consumers `npm install` and get ESM + CJS + `.d.ts`.
 - [x] Generate `.d.ts` files (`vite-plugin-dts`)
 - [x] Update `package.json` `main`, `module`, `types`, `exports` to point at built `dist/`
 - [x] Use `files` allowlist in package.json (chose this over `.npmignore` — stricter)
-- [ ] Verify install works in a scratch project before publishing
+- [x] Verify install works in a scratch project before publishing
 
 ---
 
