@@ -50,13 +50,13 @@ Shipped 2026-04-25.
 
 ---
 
-## v2.3 — Typed variant unions
+## v2.3 — Typed variant unions ✓
 
-**Goal:** instant DX win — typos in `variant="primry"` become a TypeScript error.
+Shipped 2026-04-25.
 
-- [ ] Define `BootstrapVariant` type (`"primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "link"`)
-- [ ] Apply across `VButton`, `VBadge`, `VAlert`, `VDropdown`, `VToast`, etc.
-- [ ] Drop the redundant `small` prop on `VButton` in favor of `size="sm"` (deprecate first, remove in v3.0)
+- [x] Define `BootstrapVariant` (8 colors) and `BootstrapButtonVariant` (adds `link` + `outline-*`)
+- [x] Applied to VCard, VAlert, VSpinner, VToast, VPlaceholder, VProgress, VProgressBar, VBadge, VListGroupItem, VTable, VButton, VDropdown
+- [x] `small` prop on `VButton` deprecated (JSDoc + runtime warn); removal targets v3.0
 
 ---
 

@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [2.3.0] — 2026-04-25
+
+### Added
+
+- New `BootstrapVariant` and `BootstrapButtonVariant` types, exported from the package's public API. Consumers can use them for their own typing.
+
+### Changed
+
+- The `variant` prop on `VCard`, `VAlert`, `VSpinner`, `VToast`, `VPlaceholder`, `VProgress`, `VProgressBar`, `VBadge`, `VListGroupItem`, `VTable` (component + `TableField`) now accepts `BootstrapVariant` instead of `string`. Typos like `variant="primry"` now produce a TypeScript error.
+- `VButton` and `VDropdown` accept `BootstrapButtonVariant`, which adds `"link"` and `outline-*` to the standard variant set.
+
+### Deprecated
+
+- `VButton`'s `small` prop. Use `size="sm"` instead. Removal targets v3.0; until then it still works but emits a console warning.
+
 ## [2.2.0] — 2026-04-25
 
 ### Added
