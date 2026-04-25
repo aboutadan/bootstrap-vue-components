@@ -26,14 +26,14 @@ Shipped 2026-04-25. Breaking change: vendored Bootstrap SCSS moved from `src/scs
 
 ---
 
-## v2.1 — Types-on-publish + library build
+## v2.1 — Types-on-publish + library build ✓
 
-**Goal:** consumers `npm install` and get a real bundle with autocomplete, not raw `.vue` and `.ts` files.
+Shipped 2026-04-25. Consumers `npm install` and get ESM + CJS + `.d.ts`.
 
-- [ ] Configure Vite library mode (ESM output)
-- [ ] Generate `.d.ts` files (e.g. `vite-plugin-dts`)
-- [ ] Update `package.json` `main`, `module`, `types`, `exports` to point at built `dist/`
-- [ ] Add `.npmignore` so we don't publish source noise
+- [x] Configure Vite library mode (ESM + CJS output)
+- [x] Generate `.d.ts` files (`vite-plugin-dts`)
+- [x] Update `package.json` `main`, `module`, `types`, `exports` to point at built `dist/`
+- [x] Use `files` allowlist in package.json (chose this over `.npmignore` — stricter)
 - [ ] Verify install works in a scratch project before publishing
 
 ---

@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [2.1.0] — 2026-04-25
+
+### Added
+
+- Real build pipeline: package now ships `dist/` with ESM (`.js`), CJS (`.cjs`), and TypeScript declaration files (`.d.ts`) for all components, composables, and directives.
+- `peerDependenciesMeta` marks `bootstrap` and `@popperjs/core` as optional — consumers only need them if they use the tooltip/popover directives.
+
+### Changed
+
+- `package.json`:
+  - `main` → `./dist/index.cjs`
+  - `module` → `./dist/index.js`
+  - `types` → `./dist/index.d.ts`
+  - `exports` map updated to expose `types/import/require` triplets for `.`, `./directives/tooltip`, `./directives/popover`. The `./src/assets/scss/*` export remains source-served (consumed at consumer build time).
+  - `files` allowlist: published tarball now includes only `dist/` and `src/assets/scss/` (~470kB packed).
+
+### Internal
+
+- Added `vite-plugin-dts` for declaration generation.
+- Added `bootstrap`, `@popperjs/core`, `@types/bootstrap` as devDependencies (used only at build time for type resolution).
+- `dist/` is gitignored.
+
 ## [2.0.0] — 2026-04-25
 
 ### Changed
