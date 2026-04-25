@@ -1,0 +1,5 @@
+dist
+node_modules
+src/assets/scss
+package-lock.json
+*.tgz

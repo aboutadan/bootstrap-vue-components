@@ -12,6 +12,7 @@ export default defineConfig({
     dts({
       tsconfigPath: "./tsconfig.json",
       include: ["src/**/*.ts", "src/**/*.vue"],
+      exclude: ["src/**/*.test.ts"],
       cleanVueFileName: true,
     }),
   ],

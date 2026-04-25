@@ -17,7 +17,7 @@ defineEmits<{
 }>();
 
 onMounted(() => {
-  if (props.small !== undefined) {
+  if (props.small) {
     console.warn(
       '[VButton] The `small` prop is deprecated and will be removed in v3.0. Use `size="sm"` instead.'
     );
