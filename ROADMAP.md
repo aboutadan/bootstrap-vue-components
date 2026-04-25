@@ -86,13 +86,24 @@ Shipped 2026-04-25 as a scaffold. Adding component pages is incremental work —
 
 ---
 
-## v3.0 — Future breaking changes
+## v3.0 — Drop deprecated API ✓
 
-**Goal:** clean up API debt accumulated by then.
+Shipped 2026-04-25. Completes the deprecation cycle started in v2.3.
 
-- [ ] Remove deprecated `small` prop from `VButton`
-- [ ] Reconsider `menuAlign?: "end"` → `menuAlign?: "start" | "end"` on `VDropdown`
-- [ ] Anything else that needed a breaking change but couldn't ship in 2.x
+- [x] Remove deprecated `small` prop from `VButton`
+- [ ] ~~Reconsider `menuAlign?: "end"` → `menuAlign?: "start" | "end"`~~ (decided not to: only `"end"` does anything in Bootstrap; making it accept `"start"` would be misleading. Left as-is.)
+
+---
+
+## Beyond v3.0 (no fixed schedule)
+
+These are open follow-ups, not committed phases:
+
+- VOffcanvas a11y: mirror v2.2's modal work (focus trap, aria, ref-counted body class)
+- More component pages in the docs site (~37 remaining)
+- vue-docgen-api integration so prop tables auto-generate from source
+- Generic typing on VTable's `items` so cell renders are type-safe per row
+- Replace internal `useId` with Vue 3.5's built-in `useId` for SSR-safe IDs (keep our export as a thin re-export for backwards compat)
 
 ---
 

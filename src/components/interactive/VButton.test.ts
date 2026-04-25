@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import VButton from "./VButton.vue";
 
 describe("VButton", () => {
@@ -50,21 +50,5 @@ describe("VButton", () => {
   it("renders slot content", () => {
     const wrapper = mount(VButton, { slots: { default: "Click me" } });
     expect(wrapper.text()).toBe("Click me");
-  });
-
-  it("warns when the deprecated small prop is used", () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    mount(VButton, { props: { small: true } });
-    expect(warn).toHaveBeenCalledWith(
-      expect.stringContaining("small` prop is deprecated")
-    );
-    warn.mockRestore();
-  });
-
-  it("does not warn when small is omitted", () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    mount(VButton);
-    expect(warn).not.toHaveBeenCalled();
-    warn.mockRestore();
   });
 });

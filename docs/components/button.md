@@ -82,7 +82,6 @@ Adds the `w-100` utility so the button fills its container.
 | `disabled` | `boolean`                 | `false`     | Disables the button                                        |
 | `type`     | `"button" \| "submit" \| "reset"` | `"button"`  | Native HTML button type                            |
 | `block`    | `boolean`                 | `false`     | Adds `w-100` so the button fills its container             |
-| `small`    | `boolean`                 | `false`     | **Deprecated.** Use `size="sm"`. Removed in v3.0.          |
 
 ## Events
 

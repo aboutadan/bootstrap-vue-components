@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [3.0.0] — 2026-04-25
+
+### Removed
+
+- **Breaking:** `VButton`'s `small` prop. Deprecated in v2.3. Use `size="sm"` instead.
+
+### Migration
+
+```diff
+- <VButton small>...</VButton>
++ <VButton size="sm">...</VButton>
+```
+
+That's the only breaking change in this release.
+
 ## [2.5.0] — 2026-04-25
 
 ### Added
