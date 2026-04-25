@@ -1,0 +1,24 @@
+{
+  "stack": {
+    "language": "typescript",
+    "framework": "vue"
+  },
+  "folders": {
+    "components": "src/components",
+    "composables": "src/composables",
+    "utils": "src/lib",
+    "pages": "src/views",
+    "styles": "src/assets"
+  },
+  "naming": {
+    "components": "PascalCase",
+    "composables": "camelCase",
+    "utils": "camelCase",
+    "pages": "PascalCase"
+  },
+  "language": {
+    "ui_strings": "en",
+    "code_identifiers": "en",
+    "comments": "en"
+  }
+}

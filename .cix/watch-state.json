@@ -1,0 +1,14 @@
+{
+  "heartbeat_stale_after_seconds": 45,
+  "last_heartbeat_at": 1777141598,
+  "last_index_at": 1777140018,
+  "last_indexed_file": "README.md",
+  "last_prune_at": 1777141598,
+  "last_prune_removed": 0,
+  "pid": 59380,
+  "project_id": "9f0e263511f4",
+  "project_label": "github.com/aboutadan/bootstrap-vue-components",
+  "repo_root": "/Users/adam/sites/bootstrap-custom-vue-ui",
+  "started_at": 1777139672,
+  "status": "running"
+}

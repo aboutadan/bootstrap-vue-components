@@ -1,17 +1,22 @@
 {
-  "name": "bootstrap-vue-components",
-  "version": "1.0.0",
+  "name": "bootstrap-custom-vue-ui",
+  "version": "2.0.0",
   "private": false,
   "type": "module",
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./src/scss/*": "./src/scss/*",
+    "./src/assets/scss/*": "./src/assets/scss/*",
     "./directives/tooltip": "./src/directives/vTooltip.ts",
     "./directives/popover": "./src/directives/vPopover.ts"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "vue": "^3.5.24",

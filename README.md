@@ -1,4 +1,4 @@
-# bootstrap-vue-components
+# bootstrap-custom-vue-ui
 
 A Vue 3 component library built on Bootstrap's SCSS — without Bootstrap's JavaScript. All interactivity is handled with pure Vue reactivity, so the only runtime dependency is Vue itself.
 
@@ -14,14 +14,14 @@ The tooltip and popover directives are **optional** and require `bootstrap` + `@
 ## Installation
 
 ```bash
-npm install bootstrap-vue-components
+npm install bootstrap-custom-vue-ui
 ```
 
 ### Global Registration (Plugin)
 
 ```js
 import { createApp } from "vue";
-import BootstrapVueComponents from "bootstrap-vue-components";
+import BootstrapVueComponents from "bootstrap-custom-vue-ui";
 
 const app = createApp(App);
 app.use(BootstrapVueComponents);
@@ -33,7 +33,7 @@ This registers every component globally so you can use them directly in template
 ### Tree-Shakeable Imports
 
 ```js
-import { VButton, VCard, VModal } from "bootstrap-vue-components";
+import { VButton, VCard, VModal } from "bootstrap-custom-vue-ui";
 ```
 
 Import only what you need and register components locally or globally.
@@ -59,7 +59,7 @@ npm i bootstrap@5.3.8 bootstrap-icons
 This package vendors Bootstrap's SCSS source as a convenience. If you don't already have Bootstrap in your project, you can import it directly:
 
 ```scss
-@import "bootstrap-vue-components/src/scss/style.scss";
+@import "bootstrap-custom-vue-ui/src/assets/scss/style.scss";
 ```
 
 ## Components
@@ -242,7 +242,7 @@ const showModal = ref(false);
 ## Composables
 
 ```js
-import { useId, useValidation } from "bootstrap-vue-components";
+import { useId, useValidation } from "bootstrap-custom-vue-ui";
 ```
 
 | Composable                          | Description                                                                                                                |
@@ -263,8 +263,8 @@ npm install bootstrap @popperjs/core
 **Registration:**
 
 ```js
-import vTooltip from "bootstrap-vue-components/directives/tooltip";
-import vPopover from "bootstrap-vue-components/directives/popover";
+import vTooltip from "bootstrap-custom-vue-ui/directives/tooltip";
+import vPopover from "bootstrap-custom-vue-ui/directives/popover";
 
 app.directive("tooltip", vTooltip);
 app.directive("popover", vPopover);
@@ -282,7 +282,7 @@ app.directive("popover", vPopover);
 
 ## Contributing & Feedback
 
-Have a suggestion, found a bug, or want to request a feature? Feel free to [open an issue](https://github.com/aboutadan/bootstrap-vue-components/issues) on GitHub.
+Have a suggestion, found a bug, or want to request a feature? Feel free to open an issue on GitHub.
 
 ## License
 
