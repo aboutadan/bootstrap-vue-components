@@ -1,40 +1,56 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject, toRef, type PropType } from "vue";
+import { useValidation } from "../../composables/useValidation";
 
-const props = defineProps<{
-  modelValue?: string
-  placeholder?: string
-  disabled?: boolean
-  readonly?: boolean
-  rows?: number | string
-  label?: string
-  id?: string
-  isValid?: boolean | null
-  helpText?: string
-}>()
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
+  placeholder: String,
+  disabled: Boolean,
+  readonly: Boolean,
+  rows: [Number, String] as PropType<number | string>,
+  label: String,
+  id: String,
+  isValid: {
+    type: Boolean as PropType<boolean | null | undefined>,
+    default: undefined,
+  },
+  helpText: String,
+});
 
-const emit = defineEmits<{
-  'update:modelValue': [value: string]
-}>()
+const form = inject<Record<string, any>>("form", {});
 
-const textareaId = computed(() => props.id ?? (props.label ? `textarea-${props.label.toLowerCase().replace(/\s+/g, '-')}` : undefined))
+const textareaId = computed(
+  () =>
+    props.id ??
+    (props.label
+      ? `textarea-${props.label.toLowerCase().replace(/\s+/g, "-")}`
+      : undefined),
+);
 
-const validationClass = computed(() => {
-  if (props.isValid === true) return 'is-valid'
-  if (props.isValid === false) return 'is-invalid'
-  return ''
-})
+const { validationClass, feedbackType } = useValidation(
+  toRef(props, "isValid"),
+  toRef(props, "helpText"),
+);
 
 function onInput(event: Event) {
-  emit('update:modelValue', (event.target as HTMLTextAreaElement).value)
+  form[props.name] = (event.target as HTMLTextAreaElement).value;
 }
 </script>
 
 <template lang="pug">
-div
-  label.form-label(v-if="label" :for="textareaId") {{ label }}
-  textarea(:id="textareaId" :class="['form-control', validationClass]" :value="modelValue" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" :rows="rows ?? 3" @input="onInput")
-  div.invalid-feedback(v-if="helpText && isValid === false") {{ helpText }}
-  div.valid-feedback(v-else-if="helpText && isValid === true") {{ helpText }}
-  div.form-text(v-else-if="helpText") {{ helpText }}
+.input-container
+  v-label(v-if="label" :for="textareaId") {{ label }}
+  textarea(:id="textareaId" :class="['form-control', validationClass]" :value="form[name]" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" :rows="rows ?? 3" @input="onInput")
+  div(v-if="helpText" :class="feedbackType") {{ helpText }}
 </template>
+
+<style lang="scss" scoped>
+.input-container:has(.form-control:focus) {
+  .form-label {
+    color: var(--bs-primary);
+  }
+}
+</style>

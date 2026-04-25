@@ -1,31 +1,34 @@
 <template lang="pug">
-div
-  label.form-label(v-if="label" :for="inputId") {{ label }}
-  input(:id="inputId" :class="['form-control', size && `form-control-${size}`, validationClass]" :type="type ?? 'text'" :value="modelValue" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @input="onInput")
-  div.invalid-feedback(v-if="helpText && isValid === false") {{ helpText }}
-  div.valid-feedback(v-else-if="helpText && isValid === true") {{ helpText }}
-  div.form-text(v-else-if="helpText") {{ helpText }}
+.input-container
+  v-label(v-if="label" :for="inputId") {{ label }}
+  input(:id="inputId" :class="['form-control', size && `form-control-${size}`, validationClass]" :type="type ?? 'text'" :value="form[name]" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @input="onInput")
+  div(v-if="helpText" :class="feedbackType") {{ helpText }}
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, inject, toRef, type PropType } from "vue";
+import { useValidation } from "../../composables/useValidation";
 
-const props = defineProps<{
-  modelValue?: string;
-  type?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  size?: "sm" | "lg";
-  label?: string;
-  id?: string;
-  isValid?: boolean | null;
-  helpText?: string;
-}>();
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
+  type: String,
+  placeholder: String,
+  disabled: Boolean,
+  readonly: Boolean,
+  size: String as PropType<"sm" | "lg">,
+  label: String,
+  id: String,
+  isValid: {
+    type: Boolean as PropType<boolean | null | undefined>,
+    default: undefined,
+  },
+  helpText: String,
+});
 
-const emit = defineEmits<{
-  "update:modelValue": [value: string];
-}>();
+const form = inject<Record<string, any>>("form", {});
 
 const inputId = computed(
   () =>
@@ -35,13 +38,20 @@ const inputId = computed(
       : undefined),
 );
 
-const validationClass = computed(() => {
-  if (props.isValid === true) return "is-valid";
-  if (props.isValid === false) return "is-invalid";
-  return "";
-});
+const { validationClass, feedbackType } = useValidation(
+  toRef(props, "isValid"),
+  toRef(props, "helpText"),
+);
 
 function onInput(event: Event) {
-  emit("update:modelValue", (event.target as HTMLInputElement).value);
+  form[props.name] = (event.target as HTMLInputElement).value;
 }
 </script>
+
+<style lang="scss" scoped>
+.input-container:has(.form-control:focus) {
+  .form-label {
+    color: var(--bs-primary);
+  }
+}
+</style>

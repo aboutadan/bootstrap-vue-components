@@ -1,43 +1,52 @@
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
-import { useId } from '../../composables/useId'
-import { useValidation } from '../../composables/useValidation'
+import { computed, toRef, inject, type PropType } from "vue";
+import { useId } from "../../composables/useId";
+import { useValidation } from "../../composables/useValidation";
 
-const props = defineProps<{
-  modelValue?: boolean | string[]
-  value?: string
-  label?: string
-  inline?: boolean
-  indeterminate?: boolean
-  disabled?: boolean
-  id?: string
-  isValid?: boolean | null
-  helpText?: string
-}>()
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
+  value: String,
+  label: String,
+  inline: Boolean,
+  indeterminate: Boolean,
+  disabled: Boolean,
+  id: String,
+  isValid: {
+    type: Boolean as PropType<boolean | null | undefined>,
+    default: undefined,
+  },
+  helpText: String,
+});
 
-const emit = defineEmits<{
-  'update:modelValue': [value: boolean | string[]]
-}>()
+const form = inject<Record<string, any>>("form", {});
 
-const checkId = computed(() => props.id ?? useId('check'))
-const { validationClass, feedbackType } = useValidation(toRef(props, 'isValid'), toRef(props, 'helpText'))
+const checkId = computed(() => props.id ?? useId("check"));
+const { validationClass, feedbackType } = useValidation(
+  toRef(props, "isValid"),
+  toRef(props, "helpText"),
+);
 
 const isChecked = computed(() => {
-  if (Array.isArray(props.modelValue)) {
-    return props.value !== undefined && props.modelValue.includes(props.value)
+  const formValue = form[props.name];
+  if (Array.isArray(formValue)) {
+    return props.value !== undefined && formValue.includes(props.value);
   }
-  return !!props.modelValue
-})
+  return !!formValue;
+});
 
 function onChange(event: Event) {
-  const checked = (event.target as HTMLInputElement).checked
-  if (Array.isArray(props.modelValue) && props.value !== undefined) {
-    const arr = [...props.modelValue]
-    if (checked) arr.push(props.value)
-    else arr.splice(arr.indexOf(props.value), 1)
-    emit('update:modelValue', arr)
+  const checked = (event.target as HTMLInputElement).checked;
+  const formValue = form[props.name];
+  if (Array.isArray(formValue) && props.value !== undefined) {
+    const arr = [...formValue];
+    if (checked) arr.push(props.value);
+    else arr.splice(arr.indexOf(props.value), 1);
+    form[props.name] = arr;
   } else {
-    emit('update:modelValue', checked)
+    form[props.name] = checked;
   }
 }
 </script>
@@ -45,6 +54,6 @@ function onChange(event: Event) {
 <template lang="pug">
 div(:class="['form-check', inline && 'form-check-inline']")
   input(:id="checkId" :class="['form-check-input', validationClass]" type="checkbox" :checked="isChecked" :disabled="disabled" :indeterminate="indeterminate" @change="onChange")
-  label.form-check-label(v-if="label" :for="checkId") {{ label }}
+  v-label(v-if="label" check :for="checkId") {{ label }}
   div(v-if="helpText" :class="feedbackType") {{ helpText }}
 </template>
